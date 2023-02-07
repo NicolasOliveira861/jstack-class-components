@@ -8,6 +8,18 @@ import Layout from './components/Layout';
 import themes from './styles/themes';
 
 class App extends Component {
+  componentDidMount() {
+    console.log('componentDidMount executed!');
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log({
+      currentState: this.state,
+      prevState,
+      prevProps,
+    });
+  }
+
   render() {
     return (
       <ThemeProvider>
