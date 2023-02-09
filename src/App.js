@@ -8,6 +8,10 @@ import Layout from './components/Layout';
 import themes from './styles/themes';
 
 class App extends Component {
+  state = {
+    changed: false,
+  };
+
   componentDidMount() {
     console.log('componentDidMount executed!');
   }
@@ -20,14 +24,35 @@ class App extends Component {
     });
   }
 
+  componentDidCatch(error, info) {
+    console.log({
+      error,
+      info,
+    });
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log({
+      currentState: this.state,
+      nextState,
+      nextProps,
+    });
+
+    return true;
+  }
+
   render() {
     return (
       <ThemeProvider>
+        <button onClick={() => this.setState({ changed: true })}>
+          Change state
+        </button>
         <ThemeContext.Consumer>
           {({ theme }) => (
             <StyledThemeProvider theme={themes[theme] || themes.dark}>
               <GlobalStyle />
               <Layout />
+              {/* {theme === 'dark' && <Layout />} */}
             </StyledThemeProvider>
           )}
         </ThemeContext.Consumer>
