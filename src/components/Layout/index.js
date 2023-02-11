@@ -3,6 +3,8 @@ import React from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
 import Routes from '../../routes';
+import { BrowserRouter, Link } from 'react-router-dom';
+import { Nav } from './styles';
 
 export default class Layout extends React.Component {
   componentDidMount() {
@@ -19,11 +21,17 @@ export default class Layout extends React.Component {
 
   render() {
     return (
-      <>
+      <BrowserRouter>
         <Header />
+
+        <Nav>
+          <Link to="/">Home</Link>
+          <Link to="/posts">Posts</Link>
+        </Nav>
+
         <Routes />
         <Footer />
-      </>
+      </BrowserRouter>
     );
   }
 }
